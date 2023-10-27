@@ -11,20 +11,20 @@ This is extremely efficient for most binary codecs, most will never need an expa
 See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer/ArrayBuffer#creating_a_resizable_arraybuffer
 
 ## API
-  - new - accepts an initial buffer size
-  - appendByte(val: number) appends a byte to the end of accumulation 
-  - appendBuffer(buf: Uint8Array) appends a buffer to the accumulation
-  - extractEncoded() extracts all encoded bytes from the accumulation
+  - (constructor) - accepts an initial buffer size
+  - appendByte(val: number) appends a byte at the current insertionPoint 
+  - appendBuffer(buf: Uint8Array) appends the buffer at the current insertionPoint
+  - extractEncoded() extracts all encoded bytes from the accumulator
 
 ## Test-demo
-I've included demonstration using a refactored copy of deno/std/msgpack/encoder.    
+I've included a test demonstration using a refactored copy of deno/std/msgpack/encoder.    
 I've replaced (one-to-one), the use of the **_byteParts_** array with an **_Accumulator_** .   
 Rather than /std/bytes/concat, we simply return the accumulator.  
 
 Changes to original encoder are simply: 
-   - replacing a byteParts: Uint8Array[] with an accumulator; see: ./accumulator.ts
-   - in several places, I renamed the parameter `object` to `item` for readability,
-     as I found the name `object` a bit confusing.
+   - Replacing the byteParts: Uint8Array[], with an accumulator instance; see: ./accumulator.ts
+   - in several places, I renamed the parameter `object`  to the name `item` for readability.      
+       _I found the name `object` a bit confusing in a few places_
 
 ## Run example tests:
 ```
