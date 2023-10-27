@@ -1,6 +1,6 @@
 
 # Acummulator buffer
-An efficient expandable buffer. with zero-copy-expansion.  
+An efficient expandable buffer, featuring zero-copy expansion.  
 This utility is used mainly for binary codecs such as MessagePack.   
 I've used a modified deno/std/msgpack/encoder here to demonsrate its usage.   
 
