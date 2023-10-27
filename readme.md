@@ -1,21 +1,24 @@
 
 # Acummulator buffer
-An efficient zero-copy expandable buffer.
-This utility is used mainly for binary codecs such as MessagePack.
-I've used a modified deno-std msgpack encoder to demonsrate usage.
+An efficient zero-copy expandable buffer.   
+This utility is used mainly for binary codecs such as MessagePack.   
+I've used a modified deno/std/msgpack/encoder here to demonsrate its usage.   
 
 ## Expanable
+Accumulators buffer is a zero-copy expandable ArrayBuffer. Values are simply appended to it.    
+As the buffer fills it will auto-expand in fixed size increments (default = 32k).   
+This is extremely efficient for most binary codecs, most will never need an expand.   
 See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer/ArrayBuffer#creating_a_resizable_arraybuffer
 
 ## API
   - new - accepts an initial buffer size
-  - appendByte(val: number) adds a byte to the accumulator
-  - appendBuffer(buf: Uint8Array) adds a buffer to the accumulator
-  - extractEncoded() extracts all encoded bytes from the accumulator
+  - appendByte(val: number) appends a byte to the end of accumulation 
+  - appendBuffer(buf: Uint8Array) appends a buffer to the accumulation
+  - extractEncoded() extracts all encoded bytes from the accumulation
 
 ## Test-demo
-Basically, the demo is using a refactored copy of deno/std/msgpack/encoder.    
-I've replaced (one-to-one), the use of **_byteParts_** array with an **_Accumulator_** .  
+I've included demonstration using a refactored copy of deno/std/msgpack/encoder.    
+I've replaced (one-to-one), the use of the **_byteParts_** array with an **_Accumulator_** .   
 Rather than /std/bytes/concat, we simply return the accumulator.  
 
 Changes to original encoder are simply: 
@@ -23,5 +26,9 @@ Changes to original encoder are simply:
    - in several places, I renamed the parameter `object` to `item` for readability,
      as I found the name `object` a bit confusing.
 
+## Run example tests:
+```
+deno test --allow-read
+```
 ## Note:
 I think the Accumulator would be a nice addition to deno/std/byte/
