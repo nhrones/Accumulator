@@ -31,4 +31,5 @@ Changes to original encoder are simply:
 deno test --allow-read
 ```
 ## Note:
+This buffer is working very well in my DenoKv-KeyCodec and my DenoKv-ValueCodec.     
 I think the Accumulator would be a nice addition to deno/std/byte/
