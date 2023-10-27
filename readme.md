@@ -1,11 +1,9 @@
 # Acummulator buffer
-
 An efficient expandable buffer, featuring zero-copy expansion.\
-This utility is used mainly for binary codecs such as MessagePack.\
-I've used a modified deno/std/msgpack/encoder here to demonsrate its usage.
+This utility is used mainly for binary codecs such as MessagePack, KvKeyCodec, KvValueCodec.\
+I've included a refactored deno/std/msgpack/encoder here to demonsrate usage.
 
 ## Expanable
-
 The internal buffer is a resizable ArrayBuffer. Values are simply appended to
 it.\
 As the buffer fills it will auto-expand in fixed size increments (default =
@@ -16,11 +14,10 @@ See:
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer/ArrayBuffer#creating_a_resizable_arraybuffer
 
 ## API
-
-- (constructor) - accepts an initial buffer size
+- (constructor) - accepts an initial buffer size (default=32k)
 - appendByte(val: number) appends a byte at the current insertionPoint
 - appendBuffer(buf: Uint8Array) appends the buffer at the current insertionPoint
-- extractEncoded() extracts all encoded bytes from 0 to current insertionPoint
+- extractEncoded() returns all encoded bytes from 0 to current insertionPoint
 
 ## Simple example
 ```ts
@@ -31,6 +28,7 @@ export function encode(item: ValueType) {
 }
 
 function encodeSlice(item: ValueType, accumulator: Accumulator) {
+
    if (item === null) {
       accumulator.appendByte(0xc0);
       return;
@@ -44,11 +42,13 @@ function encodeSlice(item: ValueType, accumulator: Accumulator) {
    if (typeof item === "string") {
       const encoder = new TextEncoder();
       accumulator.appendBuffer(encoded);
+      return;
    }
    ...
-   ...
-   for (const obj of item) {
-      encodeSlice(obj, accumulator);
+   ... 
+   // handle objects
+   for (const part of item) {
+      encodeSlice(part, accumulator);
    }
    return;
 }
