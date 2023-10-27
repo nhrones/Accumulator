@@ -1,11 +1,11 @@
 
 # Acummulator buffer
-An efficient zero-copy expandable buffer.   
+An efficient expandable buffer. with zero-copy-expansion.  
 This utility is used mainly for binary codecs such as MessagePack.   
 I've used a modified deno/std/msgpack/encoder here to demonsrate its usage.   
 
 ## Expanable
-Accumulators buffer is a zero-copy expandable ArrayBuffer. Values are simply appended to it.    
+Accumulators buffer is an expandable ArrayBuffer. Values are simply appended to it.    
 As the buffer fills it will auto-expand in fixed size increments (default = 32k).   
 This is extremely efficient for most binary codecs, most will never need an expand.   
 See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer/ArrayBuffer#creating_a_resizable_arraybuffer
