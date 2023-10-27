@@ -10,7 +10,7 @@ The internal buffer is a resizable ArrayBuffer. Values are simply appended to
 it.\
 As the buffer fills it will auto-expand in fixed size increments (default =
 32k).\
-This is extremely efficient for most binary codecs, most will never need to
+This is extremely efficient for most binary codecs; most will never need to
 expand.\
 See:
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer/ArrayBuffer#creating_a_resizable_arraybuffer
