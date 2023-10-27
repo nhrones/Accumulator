@@ -25,16 +25,16 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
 ## Simple example
 ```ts
 export function encode(item: ValueType) {
-  const accumulator = new Accumulator();
-  encodeSlice(item, accumulator);
-  return accumulator.extractEncoded();
+   const accumulator = new Accumulator();
+   encodeSlice(item, accumulator);
+   return accumulator.extractEncoded();
 }
 
 function encodeSlice(item: ValueType, accumulator: Accumulator) {
-  if (item === null) {
-    accumulator.appendByte(0xc0);
-    return;
-  }
+   if (item === null) {
+      accumulator.appendByte(0xc0);
+      return;
+   }
 
    if (typeof item === "number") {
       accumulator.appendBuffer(encodeNumber(item));
