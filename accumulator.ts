@@ -13,7 +13,7 @@ export class Accumulator {
    /** next byte (a-tail-pointer) */
    insertionPoint = 0
 
-   // accepts an initial buffer size (defaults to 16k)
+   // accepts an initial buffer size (defaults to 32k)
    constructor(size = 32768) {
       this.size = size
       //@ts-ignore -- Wow!  I can grow to max 3,276,800
@@ -42,7 +42,7 @@ export class Accumulator {
          while (newSize < this.insertionPoint + bytesRequired) newSize += (this.size * 2)
          //@ts-ignore Yes we can grow our buffer without copy penalty
          this.flexBuf.resize(newSize)
-         this.accumulator = new Uint8Array(this.flexBuf)
+         //this.accumulator = new Uint8Array(this.flexBuf)
       }
    }
 

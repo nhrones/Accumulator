@@ -213,7 +213,6 @@ function encodeSlice(item: ValueType, accumulator: Accumulator) {
             "Cannot safely encode Uint8Array with size larger than 32 bits",
          );
       }
-      //byteParts.push(item);
       accumulator.appendBuffer(item)
       return;
    }
