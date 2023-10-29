@@ -41,7 +41,7 @@ function encodeSlice(item: ValueType, accumulator: Accumulator) {
 
    if (typeof item === "string") {
       const encoder = new TextEncoder();
-      accumulator.appendBuffer(encoded);
+      accumulator.appendBuffer(encoder.encode(item););
       return;
    }
    ...

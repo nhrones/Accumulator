@@ -152,7 +152,7 @@ function encodeSlice(item: ValueType, accumulator: Accumulator) {
          const dataView = new DataView(new ArrayBuffer(9));
          dataView.setBigInt64(1, item);
          dataView.setUint8(0, 0xd3);
-         accumulator.appendBuffer(new Uint8Array(dataView.buffer))
+         accumulator.appendBuffer(dataView.buffer)
          return;
       }
 
@@ -163,7 +163,7 @@ function encodeSlice(item: ValueType, accumulator: Accumulator) {
       const dataView = new DataView(new ArrayBuffer(9));
       dataView.setBigUint64(1, item);
       dataView.setUint8(0, 0xcf);
-      accumulator.appendBuffer(new Uint8Array(dataView.buffer))
+      accumulator.appendBuffer(dataView.buffer)
       return;
    }
 
@@ -173,19 +173,20 @@ function encodeSlice(item: ValueType, accumulator: Accumulator) {
       const len = encoded.length;
       
       if (len < FIVE_BITS) { // fixstr
-         accumulator.appendBuffer(new Uint8Array([0xa0 | len]))
+         accumulator.appendByte(0xa0 | len)
       } else if (len < EIGHT_BITS) { // str 8
-         accumulator.appendBuffer(new Uint8Array([0xd9, len]))
+         accumulator.appendByte(0xd9)
+         accumulator.appendByte(len)
       } else if (len < SIXTEEN_BITS) { // str 16
          const dataView = new DataView(new ArrayBuffer(3));
          dataView.setUint16(1, len);
          dataView.setUint8(0, 0xda);
-         accumulator.appendBuffer(new Uint8Array(dataView.buffer))
+         accumulator.appendBuffer(dataView.buffer)
       } else if (len < THIRTY_TWO_BITS) { // str 32
          const dataView = new DataView(new ArrayBuffer(5));
          dataView.setUint32(1, len);
          dataView.setUint8(0, 0xdb);
-         accumulator.appendBuffer(new Uint8Array(dataView.buffer))
+         accumulator.appendBuffer(dataView.buffer)
       } else {
          throw new Error(
             "Cannot safely encode string with size larger than 32 bits",
@@ -202,12 +203,12 @@ function encodeSlice(item: ValueType, accumulator: Accumulator) {
          const dataView = new DataView(new ArrayBuffer(3));
          dataView.setUint16(1, item.length);
          dataView.setUint8(0, 0xc5);
-         accumulator.appendBuffer(new Uint8Array(dataView.buffer))
+         accumulator.appendBuffer(dataView.buffer)
       } else if (item.length < THIRTY_TWO_BITS) { // bin 32
          const dataView = new DataView(new ArrayBuffer(5));
          dataView.setUint32(1, item.length);
          dataView.setUint8(0, 0xc6);
-         accumulator.appendBuffer(new Uint8Array(dataView.buffer))
+         accumulator.appendBuffer(dataView.buffer)
       } else {
          throw new Error(
             "Cannot safely encode Uint8Array with size larger than 32 bits",
@@ -224,12 +225,12 @@ function encodeSlice(item: ValueType, accumulator: Accumulator) {
          const dataView = new DataView(new ArrayBuffer(3));
          dataView.setUint16(1, item.length);
          dataView.setUint8(0, 0xdc);
-         accumulator.appendBuffer(new Uint8Array(dataView.buffer))
+         accumulator.appendBuffer(dataView.buffer)
       } else if (item.length < THIRTY_TWO_BITS) { // array 32
          const dataView = new DataView(new ArrayBuffer(5));
          dataView.setUint32(1, item.length);
          dataView.setUint8(0, 0xdd);
-         accumulator.appendBuffer(new Uint8Array(dataView.buffer))
+         accumulator.appendBuffer(dataView.buffer)
       } else {
          throw new Error(
             "Cannot safely encode array with size larger than 32 bits",
@@ -252,12 +253,12 @@ function encodeSlice(item: ValueType, accumulator: Accumulator) {
          const dataView = new DataView(new ArrayBuffer(3));
          dataView.setUint16(1, numKeys);
          dataView.setUint8(0, 0xde);
-         accumulator.appendBuffer(new Uint8Array(dataView.buffer))
+         accumulator.appendBuffer(dataView.buffer)
       } else if (numKeys < THIRTY_TWO_BITS) { // map 32
          const dataView = new DataView(new ArrayBuffer(5));
          dataView.setUint32(1, numKeys);
          dataView.setUint8(0, 0xdf);
-         accumulator.appendBuffer(new Uint8Array(dataView.buffer))
+         accumulator.appendBuffer(dataView.buffer)
       } else {
          throw new Error("Cannot safely encode map with size larger than 32 bits");
       }

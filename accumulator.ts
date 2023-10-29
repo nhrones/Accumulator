@@ -28,10 +28,10 @@ export class Accumulator {
    }
 
    /** add a buffer to the accumulator */
-   appendBuffer(buf: Uint8Array) {
+   appendBuffer(buf: ArrayBuffer) {
       const len = buf.byteLength
       this.requires(len)
-      this.accumulator.set(buf, this.insertionPoint)
+      this.accumulator.set(new Uint8Array(buf), this.insertionPoint)
       this.insertionPoint += len
    }
 
@@ -40,9 +40,9 @@ export class Accumulator {
       if (this.accumulator.length < this.insertionPoint + bytesRequired) {
          let newSize = this.accumulator.byteLength
          while (newSize < this.insertionPoint + bytesRequired) newSize += (this.size * 2)
-         //@ts-ignore Yes we can grow our buffer without copy penalty
+         // the following will resize the mounted accumulator (Uint8Array) automatically 
+         //@ts-ignore Yes we can grow an ArrayBuffer without copy penalty.
          this.flexBuf.resize(newSize)
-         //this.accumulator = new Uint8Array(this.flexBuf)
       }
    }
 

@@ -14,5 +14,5 @@ for (let i = 0; i < 50000; i++) {
 const started = performance.now()
 const _m = encode(bigObject);
 const t = performance.now() - started
-console.log(`Encoding large object with 100k propertiess took: ${t.toFixed()} ms
+console.log(`Encoding large object with 50k propertiess took: ${t.toFixed()} ms
 `)
