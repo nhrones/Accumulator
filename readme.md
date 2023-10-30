@@ -14,10 +14,10 @@ See:
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer/ArrayBuffer#creating_a_resizable_arraybuffer
 
 ## API
-- (constructor) - accepts an initial buffer size (default=32k)
-- appendByte(val: number) appends a byte at the current insertionPoint
-- appendBuffer(buf: Uint8Array) appends the buffer at the current insertionPoint
-- extractEncoded() returns all encoded bytes from 0 to current insertionPoint
+- new Accumulator(size: number = 32768) - accepts an initial buffer size (default=32k)
+- appendByte(val: number) - appends a byte at the current insertionPoint
+- appendBuffer(buf: ArrayBuffer) - appends the buffer at the current insertionPoint
+- extract() - returns all appended bytes as Uint8Array (0 -> insertionPoint)
 
 ## Simple example
 ```ts
@@ -78,6 +78,5 @@ deno test --allow-read
 
 ## Note:
 
-This buffer is working very well in my DenoKv-KeyCodec and my
-DenoKv-ValueCodec.\
-I think the Accumulator would be a nice addition to deno/std/byte/
+This buffer is working very well in DenoKvKeyCodec and my DenoKvValueCodec.\
+I think this Accumulator would be a nice addition to deno/std/byte/.

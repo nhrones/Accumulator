@@ -53,7 +53,7 @@ const SIXTY_FOUR_BITS = 18446744073709551616n;
 export function encode(item: ValueType) {
    const accumulator = new Accumulator();
    encodeSlice(item, accumulator);
-   return accumulator.extractEncoded();
+   return accumulator.extract();
 }
 
 function encodeFloat64(num: number) {

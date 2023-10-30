@@ -17,7 +17,7 @@ export class Accumulator {
    constructor(size = 32768) {
       this.size = size
       //@ts-ignore -- Wow!  I can grow to max 3,276,800
-      this.flexBuf = new ArrayBuffer( size, { maxByteLength: size * 1000 })
+      this.flexBuf = new ArrayBuffer(size, { maxByteLength: size * 1000 })
       this.accumulator = new Uint8Array(this.flexBuf)
    }
 
@@ -40,16 +40,13 @@ export class Accumulator {
       if (this.accumulator.length < this.insertionPoint + bytesRequired) {
          let newSize = this.accumulator.byteLength
          while (newSize < this.insertionPoint + bytesRequired) newSize += (this.size * 2)
-         // the following will resize the mounted accumulator (Uint8Array) automatically 
-         //@ts-ignore Yes we can grow an ArrayBuffer without copy penalty.
+         //@ts-ignore - This will resize the attached accumulator
          this.flexBuf.resize(newSize)
       }
    }
 
-   /** extract all encoded bytes
-    * @returns - a trimmed encoded buffer 
-    */
-   extractEncoded() {
+   /** extracts all appended bytes */
+   extract() {
       return this.accumulator.slice(0, this.insertionPoint)
    }
 }

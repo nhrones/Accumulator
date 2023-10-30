@@ -11,8 +11,6 @@ for (let i = 0; i < 50000; i++) {
 }
 
 // Testing Accumulator-based encoder
-const started = performance.now()
-const _m = encode(bigObject);
-const t = performance.now() - started
-console.log(`Encoding large object with 50k propertiess took: ${t.toFixed()} ms
-`)
+Deno.test("Testing big-object", () => {
+   const _m = encode(bigObject);
+})
