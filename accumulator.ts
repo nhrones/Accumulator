@@ -1,6 +1,6 @@
 
 /** an expandable buffer */
-export default class Accumulator {
+export class Accumulator {
 
    size: number
 
