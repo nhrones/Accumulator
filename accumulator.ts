@@ -5,7 +5,7 @@ export class Accumulator {
    size: number
 
    /** resizable ArrayBuffer */
-   flexBuf: ArrayBuffer
+   flexBuff: ArrayBuffer
 
    /** the accumulation buffer */
    accumulator: Uint8Array;
@@ -17,8 +17,8 @@ export class Accumulator {
    constructor(size = 32768) {
       this.size = size
       //@ts-ignore -- Wow!  I can grow to max 3,276,800
-      this.flexBuf = new ArrayBuffer(size, { maxByteLength: size * 1000 })
-      this.accumulator = new Uint8Array(this.flexBuf)
+      this.flexBuff = new ArrayBuffer(size, { maxByteLength: size * 1000 })
+      this.accumulator = new Uint8Array(this.flexBuff)
    }
 
    /** add a byte to the accumulator */
@@ -41,7 +41,7 @@ export class Accumulator {
          let newSize = this.accumulator.byteLength
          while (newSize < this.insertionPoint + bytesRequired) newSize += (this.size * 2)
          //@ts-ignore - This will resize the attached accumulator
-         this.flexBuf.resize(newSize)
+         this.flexBuff.resize(newSize)
       }
    }
 
