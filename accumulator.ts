@@ -28,10 +28,10 @@ export class Accumulator {
    }
 
    /** add a buffer to the accumulator */
-   appendBuffer(buf: ArrayBuffer) {
+   appendBuffer(buf: Uint8Array) {
       const len = buf.byteLength
       this.requires(len)
-      this.accumulator.set(new Uint8Array(buf), this.insertionPoint)
+      this.accumulator.set(buf, this.insertionPoint)
       this.insertionPoint += len
    }
 
