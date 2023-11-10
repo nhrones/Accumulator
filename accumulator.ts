@@ -35,7 +35,7 @@ export class Accumulator {
       this.insertionPoint += len
    }
 
-   /** check capacity - expand the accumulator as required */
+   /** check capacity - expands the accumulator as required */
    requires(bytesRequired: number) {
       if (this.accumulator.length < this.insertionPoint + bytesRequired) {
          let newSize = this.accumulator.byteLength
@@ -45,8 +45,8 @@ export class Accumulator {
       }
    }
 
-   /** extracts all appended bytes */
+   /** extract all appended bytes from the accumulator */
    extract() {
-      return this.accumulator.slice(0, this.insertionPoint)
+      return this.accumulator.subarray(0, this.insertionPoint)
    }
 }
