@@ -18,6 +18,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
 - appendByte(val: number) - appends a byte at the current insertionPoint
 - appendBuffer(buf: ArrayBuffer) - appends the buffer at the current insertionPoint
 - extract() - returns all appended bytes as Uint8Array (0 -> insertionPoint)
+- reset() - resets insertionPoint to zero (starts a new accumulation)
 
 ## Simple example
 ```ts

@@ -49,4 +49,9 @@ export class Accumulator {
    extract() {
       return this.accumulator.subarray(0, this.insertionPoint)
    }
+
+   /** resets insertionPoint to zero */
+   reset() {
+      this.insertionPoint = 0
+   }
 }
