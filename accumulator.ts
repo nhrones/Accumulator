@@ -47,7 +47,7 @@ export class Accumulator {
 
    /** extract all appended bytes from the accumulator */
    extract() {
-      return this.accumulator.subarray(0, this.insertionPoint)
+     return this.accumulator.slice(0, this.insertionPoint)
    }
 
    /** resets insertionPoint to zero */
