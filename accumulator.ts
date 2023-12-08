@@ -46,13 +46,14 @@ export class Accumulator {
    }
 
    /**
-    * copy bytes to the front of the array and nullifying data behind it.
-    * effectively consuming it
+    * Consumes bytes from the front of the accumulator
+    * and readjusts the insertion pointer
     */
    consume(length: number) {
       this.accumulator.copyWithin(0, length, this.insertionPoint);
-      this.accumulator.fill(0, this.insertionPoint - length);
       this.insertionPoint -= length
+      //this.accumulator.fill(0, this.insertionPoint);
+      
    }
 
    /** extract all appended bytes from the accumulator */
