@@ -9,5 +9,5 @@ Deno.test("consume", () => {
    acc.consume(2) // remove first two bytes
    console.log('insertionPoint ', acc.insertionPoint) // insertionPoint  2
    assertEquals( acc.insertionPoint, 2)
-   console.log('value ', acc.extract()) // Uint8Array(2) [ 3, 4 ]
+   console.log('accumulated value: ', acc.extract()) // accumulated value:  Uint8Array(2) [ 3, 4 ]
 })
