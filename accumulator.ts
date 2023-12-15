@@ -11,7 +11,12 @@ export class Accumulator {
    accumulator: Uint8Array;
 
    /** next byte (a-tail-pointer) */
+   head = 0
+
+   /** next byte (a-tail-pointer) */
    insertionPoint = 0
+
+
 
    // accepts an initial buffer size (defaults to 32k)
    constructor(size = 32768) {
@@ -47,22 +52,26 @@ export class Accumulator {
 
    /**
     * Consumes bytes from the front of the accumulator
-    * and readjusts the insertion pointer
+    * and readjusts the head pointer
+    * @param {number} length the number of bytes to be consumed.
     */
    consume(length: number) {
-      this.accumulator.copyWithin(0, length, this.insertionPoint);
-      this.insertionPoint -= length
-      //this.accumulator.fill(0, this.insertionPoint);
-      
+      this.head += length
    }
-
-   /** extract all appended bytes from the accumulator */
+ 
+   /** 
+    * extract all appended bytes from the accumulator 
+    */
    extract() {
-      return this.accumulator.slice(0, this.insertionPoint)
+      return this.accumulator.slice(this.head, this.insertionPoint)
    }
 
-   /** resets insertionPoint to zero */
+   /** 
+    * reset both pointers to zero 
+    * creating an effectively empty accumulator
+    */
    reset() {
+      this.head = 0
       this.insertionPoint = 0
    }
 }
