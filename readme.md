@@ -17,8 +17,9 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
 - new Accumulator(size: number = 32768) - accepts an initial buffer size (default=32k)
 - appendByte(val: number) - appends a byte at the current insertionPoint
 - appendBuffer(buf: ArrayBuffer) - appends the buffer at the current insertionPoint
-- extract() - returns all appended bytes as Uint8Array (0 -> insertionPoint)
-- reset() - resets insertionPoint to zero (starts a new accumulation)
+- consume(length: number) - consumes a number of bytes from the head of the accumulator
+- extract() - returns all appended bytes as Uint8Array (head -> insertionPoint)
+- reset() - resets head and insertionPoints to zero (starts a new accumulation)
 
 ## Simple example
 ```ts
