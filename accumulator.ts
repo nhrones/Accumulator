@@ -51,8 +51,8 @@ export class Accumulator {
    }
 
    /**
-    * Consumes bytes from the front of the accumulator
-    * and readjusts the head pointer
+    * Consumes bytes from the head of the accumulator
+    * by moving the head pointer
     * @param {number} length the number of bytes to be consumed.
     */
    consume(length: number) {
