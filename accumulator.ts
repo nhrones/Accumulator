@@ -10,7 +10,7 @@ export class Accumulator {
    /** the accumulation buffer */
    accumulator: Uint8Array;
 
-   /** next byte (a-tail-pointer) */
+   /** head-poiter */
    head = 0
 
    /** next byte (a-tail-pointer) */
