@@ -1,5 +1,11 @@
 
-/** an expandable buffer */
+/** 
+ * Accumulator -- is an expandable buffer class    
+ * It's typically used for binary serialization, deserialization tasks.    
+ * 
+ * Both Bueno-Kv key and value codecs use Acuumulator for its     
+ * high perfomance and its ease of use.
+ */
 export class Accumulator {
 
    size: number
@@ -26,13 +32,13 @@ export class Accumulator {
       this.accumulator = new Uint8Array(this.flexBuff)
    }
 
-   /** add a byte to the accumulator */
+   /** add a single byte to our accumulator */
    appendByte(val: number) {
       this.requires(1)
       this.accumulator[this.insertionPoint++] = val
    }
 
-   /** add a buffer to the accumulator */
+   /** add a buffer to our accumulator */
    appendBuffer(buf: Uint8Array) {
       const len = buf.byteLength
       this.requires(len)
@@ -40,7 +46,7 @@ export class Accumulator {
       this.insertionPoint += len
    }
 
-   /** check capacity - expands the accumulator as required */
+   /** requires -- checks capacity and expands the accumulator as required */
    requires(bytesRequired: number) {
       if (this.accumulator.length < this.insertionPoint + bytesRequired) {
          let newSize = this.accumulator.byteLength
