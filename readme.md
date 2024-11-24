@@ -3,7 +3,7 @@ An efficient expandable buffer, featuring zero-copy expansion.\
 This utility is used mainly for binary codecs such as MessagePack, KvKeyCodec, KvValueCodec.\
 I've included a refactored deno/std/msgpack/encoder here to demonsrate usage.
 
-## Expanable
+## Expandable
 The internal buffer is a resizable ArrayBuffer. Values are simply appended to
 it.\
 As the buffer fills it will auto-expand in fixed size increments (default =
