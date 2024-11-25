@@ -5,7 +5,7 @@ See: https://github.com/denoland/deno_std/blob/main/msgpack/encode.ts
 We're using it here to demonstrate the Accumulator class
 See: lines 54, 56, and the function `encodeSlice` at line 125
 =====================================================================*/
-import { Accumulator } from "./accumulator.ts";
+import { Accumulator } from "./mod.ts";
 
 export type ValueType =
    | number

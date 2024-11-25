@@ -1,14 +1,14 @@
 # Acummulator buffer
-An efficient expandable buffer, featuring zero-copy expansion.\
-This utility is used mainly for binary codecs such as MessagePack, KvKeyCodec, KvValueCodec.\
-I've included a refactored deno/std/msgpack/encoder here to demonsrate usage.
+An efficient auto-expanding buffer, featuring zero-copy expansion.\
+This utility is used mainly for binary codecs such as MessagePack, my KvKeyCodec, and my KvValueCodec.\
+I've included a **_refactored_** deno/std/msgpack/encoder here to demonsrate its usage.
 
 ## Expandable
-The internal buffer is a resizable ArrayBuffer. Values are simply appended to
+The internal buffer is a native resizable-ArrayBuffer; values are simply appended to
 it.\
-As the buffer fills it will auto-expand in fixed size increments (default =
+As the buffer fills, it will auto-expand in fixed size increments (default =
 32k).\
-This is extremely efficient for most binary codecs; most will never need to
+This is extremely efficient for most binary codecs; many will never need to
 expand.\
 See:
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer/ArrayBuffer#creating_a_resizable_arraybuffer
@@ -16,10 +16,10 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
 ## API
 - new Accumulator(size: number = 32768) - accepts an initial buffer size (default=32k)
 - appendByte(val: number) - appends a byte at the current insertionPoint
-- appendBuffer(buf: ArrayBuffer) - appends the buffer at the current insertionPoint
-- consume(length: number) - consumes a number of bytes from the head of the accumulator
-- extract() - returns all appended bytes as Uint8Array (head -> insertionPoint)
-- reset() - resets head and insertionPoints to zero (starts a new accumulation)
+- appendBuffer(buf: ArrayBuffer) - appends a buffer at the current insertionPoint
+- consume(length: number) - consumes a number of bytes from the head of the accumulator. 
+- extract() - returns all accumulated bytes as Uint8Array (head -> insertionPoint - 1)
+- reset() - resets head and insertionPoint to zero (starts a new accumulation)
 
 ## Simple example
 ```ts
@@ -80,5 +80,7 @@ deno test --allow-read
 
 ## Note:
 
-This buffer is working very well in DenoKvKeyCodec and my DenoKvValueCodec.\
-I think this Accumulator would be a nice addition to deno/std/byte/.
+This buffer is working very well in my Deno-KvKeyCodec and in my Deno-KvValueCodec.\
+I thought this Accumulator would have been a nice addition to deno/std/byte/ as the existing _concat_ function can be very inefficient.\
+
+When nodes-buffer and deno/std/byte/ were implemented, the very effective native Resizable-ArrayBuffer did not exist in V8. That made the use of arrays of buffers and the then contatenation of the buffer-array neccessary. Every buffer placed in the array is an object and must be instanciated and destroyed. This creates a lot of unneed memory-churn as well as GC.

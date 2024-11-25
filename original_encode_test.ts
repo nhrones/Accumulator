@@ -3,7 +3,7 @@
 
 import { assertEquals, assertThrows } from "https://deno.land/std@0.204.0/assert/mod.ts";
 import * as path from "https://deno.land/std@0.204.0/path/mod.ts";
-import { encode } from "./encode.ts";
+import { encode } from "./msgPackEncoder.ts";
 
 const moduleDir = path.dirname(path.fromFileUrl(import.meta.url));
 const testdataDir = path.resolve(moduleDir, "testdata");

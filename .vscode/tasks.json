@@ -10,7 +10,6 @@
          "problemMatcher": [
             "$deno-test"
          ],
-         "group": "test",
          "label": "DENO TEST"
       }
    ]

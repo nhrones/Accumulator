@@ -3,8 +3,44 @@
  * Accumulator -- is an expandable buffer class    
  * It's typically used for binary serialization, deserialization tasks.    
  * 
- * Both Bueno-Kv key and value codecs use Acuumulator for its     
+ * Both of my Bueno-Kv-key and Bueno-Kv-Value codecs use Acuumulator for its     
  * high perfomance and its ease of use.
+ * # example
+ * ```ts
+ * export function encode(item: ValueType) {
+ * const accumulator = new Accumulator();
+ * encodeSlice(item, accumulator);
+ *   return accumulator.extractEncoded();
+ * }
+ *
+ * function encodeSlice(item: ValueType, accumulator: Accumulator) {
+ *
+ *   if (item === null) {
+ *      accumulator.appendByte(0xc0);
+ *      return;
+ *   }
+ *
+ *   if (typeof item === "number") {
+ *      accumulator.appendBuffer(encodeNumber(item));
+ *      return;
+ *   }
+ *
+ *  if (typeof item === "string") {
+ *      const encoder = new TextEncoder();
+ *      accumulator.appendBuffer(encoder.encode(item););
+ *      return;
+ *   }
+ *
+ *   //...
+ *   //... 
+ *
+ *   // handle objects
+ *   for (const part of item) {
+ *      encodeSlice(part, accumulator);
+ *   }
+ *   return;
+ *}
+ * ```
  */
 export class Accumulator {
 
@@ -27,7 +63,7 @@ export class Accumulator {
    // accepts an initial buffer size (defaults to 32k)
    constructor(size = 32768) {
       this.size = size
-      //@ts-ignore -- Wow!  I can grow to max 3,276,800
+      //@ts-ignore (.d.ts not updated)  Wow! I can grow to max 3meg
       this.flexBuff = new ArrayBuffer(size, { maxByteLength: size * 1000 })
       this.accumulator = new Uint8Array(this.flexBuff)
    }
@@ -68,7 +104,7 @@ export class Accumulator {
    /** 
     * extract all appended bytes from the accumulator 
     */
-   extract() {
+   extract(): Uint8Array {
       return this.accumulator.slice(this.head, this.insertionPoint)
    }
 
