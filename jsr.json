@@ -1,6 +1,6 @@
 {
    "name": "@ndh/accumulator",
-   "version": "1.0.0",
+   "version": "1.0.1",
    "description": "Auto-expanding buffer accumulator",
    "exports": "./mod.ts",
    "license": "MIT",
