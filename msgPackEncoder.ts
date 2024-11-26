@@ -1,13 +1,15 @@
 /*===================================================================
-This is a modified version of the Deno std/msgpack encoder
-See: https://github.com/denoland/deno_std/blob/main/msgpack/encode.ts
 
-We're using it here to demonstrate the Accumulator class
+This is a slightly modified version of the Deno std/msgpack encoder.
+See: https://jsr.io/@std/msgpack
+
+We're using it here to demonstrate my new Accumulator 
 See: lines 54, 56, and the function `encodeSlice` at line 125
 
-I've replaced (one-to-one), the use of the 'byteParts' array with an
-'Accumulator'.   
-Rather than /std/bytes/concat, we simply return accumulator.extract().
+I've replaced (one-to-one), the use of the 'byteParts' Array with an
+'Accumulator'.
+
+Rather than jsr:@std/bytes@^1.0.2/concat, we simply return accumulator.extract().
 
 Changes to the original encoder are simply:
 
