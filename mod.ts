@@ -34,7 +34,7 @@
  *   //...
  *   //... 
  *
- *   // handle objects
+ *   // handle objects (decodes parts recursively )
  *   for (const part of item) {
  *      encodeSlice(part, accumulator);
  *   }
