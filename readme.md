@@ -58,9 +58,6 @@ function encodeSlice(item: ValueType, accumulator: Accumulator) {
 
 ## Test-demo
 
-I've included a test demonstration using a refactored copy of
-deno/std/msgpack/encoder.\
-
 I've included a test demonstration using a slightly modified 
 version of the Deno std/msgpack encoder.
 See: https://jsr.io/@std/msgpack
