@@ -6,11 +6,12 @@ See: https://jsr.io/@std/msgpack
 We're using it here to demonstrate my new Accumulator 
 See: lines 70, 72, and the function `encodeSlice` at line 141
 
-I've replaced (one-to-one), the use of the 'byteParts-Array' with an
-'Accumulator'.
+I've replaced (one-to-one), the use of the 'byteParts[]' with an
+'accumulator'.
 
-Rather than use jsr:@std/bytes@^1.0.2/concat, which loops through each element   
-in the byteParts-array and concatenates them, we simply return accumulator.extract().
+After decoding all parts, rather than use jsr:@std/bytes@^1.0.2/concat,  
+which loops through each element in the byteParts-array to concatenate them,  
+we simply return our accumulation -> accumulator.extract().
 
 Changes to the original encoder are simply:
 
