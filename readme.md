@@ -85,4 +85,4 @@ deno test --allow-read
 This buffer is working very well in my Deno-KvKeyCodec and in my Deno-KvValueCodec.\
 I thought this Accumulator would have been a nice addition to deno/std/byte/ as the existing _concat_ function can be very inefficient.\
 
-When nodes-buffer and deno/std/byte/ were implemented, the very effective native Resizable-ArrayBuffer did not exist in V8. That made the use of arrays of buffers and the then contatenation of the buffer-array neccessary. Every buffer placed in the array is an object and must be instanciated and destroyed. This creates a lot of unneed memory-churn as well as GC.
+When nodes-buffer and deno/std/byte/ were implemented, the very effective native Resizable-ArrayBuffer did not exist in V8. That made the use of arrays of buffers and the then contatenation of the buffer-array neccessary. Every buffer placed in the array is an object and must be instanciated and destroyed. This creates a lot of memory-churn as well as GC.
