@@ -3,14 +3,14 @@
 This is a slightly modified version of the Deno std/msgpack encoder.
 See: https://jsr.io/@std/msgpack
 
-We're using it here to demonstrate my the use of a byte-accumulator. 
-See: lines 70, 72, and the function `encodeSlice` at line 141
+We're using it here to demonstrate the use of this byte-accumulator. 
+See: lines 71, 72, 73 and the function `encodeSlice` at line 142
 
 I've replaced (one-to-one), the use of the 'byteParts[]' with an
 'accumulator'.
 
 After decoding all parts, rather than use jsr:@std/bytes@^1.0.2/concat,  
-which loops through each element in the byteParts-array to concatenate them,  
+which loops through each Uint8Array in the byteParts-Array to concatenate them,  
 we simply return our accumulation -> accumulator.extract().
 
 Changes to the original encoder are simply:
