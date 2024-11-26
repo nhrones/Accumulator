@@ -9,7 +9,8 @@ See: lines 54, 56, and the function `encodeSlice` at line 125
 I've replaced (one-to-one), the use of the 'byteParts' Array with an
 'Accumulator'.
 
-Rather than jsr:@std/bytes@^1.0.2/concat, we simply return accumulator.extract().
+Rather than use jsr:@std/bytes@^1.0.2/concat, which loops through each element   
+in the byteParts-array and concatenates them, we simply return accumulator.extract().
 
 Changes to the original encoder are simply:
 
