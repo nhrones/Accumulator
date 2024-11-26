@@ -4,7 +4,23 @@ See: https://github.com/denoland/deno_std/blob/main/msgpack/encode.ts
 
 We're using it here to demonstrate the Accumulator class
 See: lines 54, 56, and the function `encodeSlice` at line 125
+
+I've replaced (one-to-one), the use of the **_byteParts_** array with an
+**_Accumulator_** .\
+Rather than /std/bytes/concat, we simply return the accumulator.
+
+Changes to original encoder are simply:
+
+- Replaced the byteParts: Uint8Array[], with an Accumulator instance; see:
+  ./accumulator.ts
+
+- in several places, I renamed the parameter `object` to the name `item` for
+  readability.
+
+  _I found the name `object` a bit confusing in a few places_
+
 =====================================================================*/
+
 import { Accumulator } from "./mod.ts";
 
 export type ValueType =
