@@ -60,17 +60,19 @@ function encodeSlice(item: ValueType, accumulator: Accumulator) {
 
 I've included a test demonstration using a refactored copy of
 deno/std/msgpack/encoder.\
-I've replaced (one-to-one), the use of the **_byteParts_** array with an
-**_Accumulator_** .\
-Rather than /std/bytes/concat, we simply return the accumulator.
 
-Changes to original encoder are simply:
+I've included a test demonstration using a slightly modified 
+version of the Deno std/msgpack encoder.
+See: https://jsr.io/@std/msgpack
 
-- Replacing the byteParts: Uint8Array[], with an accumulator instance; see:
-  ./accumulator.ts
-- in several places, I renamed the parameter `object` to the name `item` for
-  readability.\
-  _I found the name `object` a bit confusing in a few places_
+We're using it here to demonstrate the use of this byte-accumulator. 
+I've replaced (one-to-one), the use of the 'byteParts[]' with an
+'accumulator'.
+
+After decoding all parts, rather than use jsr:@std/bytes@^1.0.2/concat,  
+which loops through each element in the byteParts-array to concatenate them,  
+we simply return our accumulation -> See: accumulator.extract().
+
 
 ## Run example tests:
 
