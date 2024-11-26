@@ -3,7 +3,7 @@
 This is a slightly modified version of the Deno std/msgpack encoder.
 See: https://jsr.io/@std/msgpack
 
-We're using it here to demonstrate my new Accumulator 
+We're using it here to demonstrate my the use of a byte-accumulator. 
 See: lines 70, 72, and the function `encodeSlice` at line 141
 
 I've replaced (one-to-one), the use of the 'byteParts[]' with an
